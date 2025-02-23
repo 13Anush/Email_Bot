@@ -1,8 +1,5 @@
 flask
 pandas
-email.mime.multipart
-email.mime.text
-email.mime.base
 email
 os
 threading
