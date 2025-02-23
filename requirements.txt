@@ -1,6 +1,2 @@
 flask
 pandas
-email
-os
-threading
-secrets
