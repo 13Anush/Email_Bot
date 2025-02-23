@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulk Email Sender</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            margin: 50px auto;
+            width: 50%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #350182;
+        }
+        input, textarea, button {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #350182;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #350182;
+        }
+        .flash {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>BULK EMAIL SENDER</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <p class="{{ category }}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="/" method="post" enctype="multipart/form-data">
+            <input type="email" name="email" placeholder="Your Email" required>
+            <input type="password" name="password" placeholder="Your Password" required>
+            <input type="text" name="subject" placeholder="Subject" required>
+            <textarea name="message" placeholder="Message" rows="4" required></textarea>
+
+            <h3>Single Email</h3>
+            <input type="email" name="recipient" placeholder="Recipient Email">
+            <h4>Attach PDFs</h4>
+            <input type="file" name="pdf_files" multiple>
+            <button type="submit" name="single_email">Send Single Email</button>
+
+            <hr>
+
+            <h3>Bulk Email</h3>
+            <input type="file" name="csv_file" required>
+            <h4>Attach PDFs</h4>
+            <input type="file" name="pdf_files" multiple>
+            <button type="submit" name="bulk_email">Send Bulk Emails</button>
+        </form>
+    </div>
+
+</body>
+</html>

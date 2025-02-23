@@ -1,0 +1,4 @@
+# Ignore JetBrains IDE (e.g., PyCharm) settings folder
+.idea/
+
+
