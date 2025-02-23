@@ -7,9 +7,10 @@ from email.mime.base import MIMEBase
 from email import encoders
 import os
 import threading
+import secrets
 
 app = Flask(__name__)
-app.secret_key = "secret_key"
+app.secret_key = secrets.token_hex(32)
 
 EMAIL_SERVER = "smtp.gmail.com"
 EMAIL_PORT = 587
