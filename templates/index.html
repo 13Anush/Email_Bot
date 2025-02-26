@@ -19,7 +19,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         h2 {
-            color: #350182;
+            color: #007BFF;
         }
         input, textarea, button {
             width: 80%;
@@ -29,13 +29,13 @@
             border: 1px solid #ccc;
         }
         button {
-            background-color: #350182;
+            background-color: #007BFF;
             color: white;
             border: none;
             cursor: pointer;
         }
         button:hover {
-            background-color: #350182;
+            background-color: #0056b3;
         }
         .flash {
             color: green;
@@ -45,7 +45,7 @@
 <body>
 
     <div class="container">
-        <h2>BULK EMAIL SENDER</h2>
+        <h2>Bulk Email Sender</h2>
 
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}

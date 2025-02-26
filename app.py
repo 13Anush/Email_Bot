@@ -7,18 +7,12 @@ from email.mime.base import MIMEBase
 from email import encoders
 import os
 import threading
-import secrets
 
 app = Flask(__name__)
-app.secret_key = secrets.token_hex(32)
-
+app.secret_key = "secret_key"
 
 EMAIL_SERVER = "smtp.gmail.com"
 EMAIL_PORT = 587
-
-@app.route("/")
-def home():
-    return render_template("index.html")
 
 
 def send_email(to, subject, message, uname, pasw, pdf_paths):
@@ -110,5 +104,4 @@ def index():
 if __name__ == "__main__":
     if not os.path.exists("uploads"):
         os.makedirs("uploads")
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(debug=True)
