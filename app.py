@@ -14,14 +14,14 @@ app.secret_key = "secret_key"
 EMAIL_SERVER = "smtp.gmail.com"
 EMAIL_PORT = 587
 
-
+# Function to send an individual email
 def send_email(to, subject, message, uname, pasw, pdf_paths):
     try:
         msg = MIMEMultipart()
         msg["From"] = uname
         msg["To"] = to
         msg["Subject"] = subject
-        msg.attach(MIMEText(message, "plain"))
+        msg.attach(MIMEText(message, "plain", "utf-8"))
 
         # Attach multiple PDFs
         for pdf_path in pdf_paths:
@@ -42,10 +42,10 @@ def send_email(to, subject, message, uname, pasw, pdf_paths):
         print("Error:", e)
         return False
 
-
+# Function to send bulk emails
 def send_bulk_emails(csv_file, subject, message, uname, pasw, pdf_paths):
     try:
-        df = pd.read_csv(csv_file)
+        df = pd.read_csv(csv_file, encoding="utf-8")
         emails = df["Email"].tolist()
         total_emails = len(emails)
         sent_count = 0
@@ -57,7 +57,6 @@ def send_bulk_emails(csv_file, subject, message, uname, pasw, pdf_paths):
         flash(f"Emails Sent: {sent_count}/{total_emails}", "success")
     except Exception as e:
         flash(f"Error: {str(e)}", "danger")
-
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -99,7 +98,6 @@ def index():
         return redirect(url_for("index"))
 
     return render_template("index.html")
-
 
 if __name__ == "__main__":
     if not os.path.exists("uploads"):
